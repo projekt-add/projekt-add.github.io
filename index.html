@@ -640,6 +640,17 @@
   }
   .icon-badge:hover{border-color:var(--chrome); background:var(--chrome-gradient); color:var(--bg);}
   .icon-badge svg{width:16px; height:16px;}
+  /* E-Mail: groesser und deutlicher als Knopf erkennbar */
+  .icon-badge.mail-btn{
+    width:auto; height:48px; padding:0 22px 0 18px; gap:11px;
+    border-radius:999px; border-color:var(--chrome-dim);
+    background:rgba(255,255,255,.04);
+    font-family:"Space Mono",monospace; font-size:.8rem; letter-spacing:.2em; text-transform:uppercase;
+    text-decoration:none; color:var(--fg);
+    box-shadow:0 0 18px rgba(255,46,120,.18);
+  }
+  .icon-badge.mail-btn svg{width:21px; height:21px;}
+  .icon-badge.mail-btn:hover{background:var(--chrome-gradient); color:var(--bg); border-color:var(--chrome);}
 
   /* ---- entrance: PROJEKT_ / ENTER ---- */
   .intro{
@@ -1308,7 +1319,7 @@
       </div>
       <dl class="spec-list">
         <div class="spec-row"><dt>Datum</dt><dd>23. Oktober</dd></div>
-        <div class="spec-row"><dt>Einlass</dt><dd>21 Uhr</dd></div>
+        <div class="spec-row"><dt>Einlass</dt><dd>19–21 Uhr DJs<br>ab 21 Uhr Live-Acts</dd></div>
         <div class="spec-row"><dt>Ort</dt><dd><a class="ort-link" href="https://maps.app.goo.gl/n8avzwSLcNPA6sSB9" target="_blank" rel="noopener noreferrer" aria-label="Locke in Google Maps öffnen">Locke<span aria-hidden="true"> ↗</span></a></dd></div>
         <div class="spec-row"><dt>Tickets</dt><dd>Quatsch</dd></div>
         <div class="spec-row"><dt>Status</dt><dd>…</dd></div>
@@ -1425,8 +1436,9 @@
       PROJEKT_ · 2026 · Seite im Aufbau
     </div>
     <div class="foot-contact">
-      <a class="icon-badge" href="mailto:projektadd040@gmail.com" aria-label="E-Mail">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      <a class="icon-badge mail-btn" href="mailto:projektadd040@gmail.com" aria-label="E-Mail an projektadd040@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        <span>E-Mail</span>
       </a>
     </div>
   </footer>
@@ -1702,10 +1714,10 @@
   /* ---------- Line-up gallery ---------- */
   // Namen wie im bestehenden Projekt hinterlegt
   var acts = [
-    {role:"Act",    name:"Camillo",   tile:"var(--pink)", caption:"23. Oktober · Locke", insta:"camillocloud"},
-    {role:"Act",    name:"Hanci",     tile:"var(--gold)", caption:"23. Oktober · Locke", insta:"hancipancii"},
-    {role:"Act",    name:"Jeroen",    tile:"var(--pink)", caption:"23. Oktober · Locke", insta:"immernochjeroen"},
-    {role:"DJ-Set", name:"Butter",    tile:"var(--gold)", caption:"23. Oktober · Locke", insta:"butter.streichzart"},
+    {role:"Act",    name:"Camillo",   tile:"var(--pink)", caption:"23. Oktober · Locke", insta:"camillocloud", foto:"camillo.webp", fokus:"center 44%"},
+    {role:"Act",    name:"Hanci",     tile:"var(--gold)", caption:"23. Oktober · Locke", insta:"hancipancii", foto:"hanci.webp", fokus:"center 46%"},
+    {role:"Act",    name:"Jeroen",    tile:"var(--pink)", caption:"23. Oktober · Locke", insta:"immernochjeroen", foto:"jeroen.webp"},
+    {role:"DJ-Set", name:"Butter",    tile:"var(--gold)", caption:"23. Oktober · Locke", insta:"butter.streichzart", foto:"butter.webp", fokus:"center 66%"},
     {role:"Act",    name:"Murks",     tile:"var(--pink)", caption:"23. Oktober · Locke", foto:"murks.webp"}
   ];
   var idx = 0;
@@ -1755,6 +1767,7 @@
           photoEl.setAttribute("src", ziel);
         }
         photoEl.alt = "Foto von " + a.name;
+        photoEl.style.objectPosition = a.fokus || "";   // Bildausschnitt pro Foto, sonst wie bisher
         if(photoEl.complete && photoEl.naturalWidth > 0){ cardEl.classList.add("has-photo"); }
         else {
           photoEl.onload = function(){
